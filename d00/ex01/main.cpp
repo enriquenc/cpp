@@ -121,7 +121,7 @@ int main(void)
             std::cout << "Enter index: ";
             if (!(std::getline(std::cin, input)))
                 break ;
-            if (input[0] > '0' && input[0] < '9') //sukablyat
+            if (input[0] > '0' && input[0] < '9' && input[1] == '\0')
                 print_all(phonebook, input[0] - 48 - 1); 
             else
                 std::cout << "Bad index" << std::endl;

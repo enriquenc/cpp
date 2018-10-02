@@ -14,7 +14,7 @@ NAME = phonebook
 
 FLAGS = -Wall -Wextra -Werror
 
-SRC = Person.class.cpp main.cpp
+SRC = Person.cpp main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
