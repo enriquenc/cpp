@@ -14,7 +14,7 @@ NAME = pony
 
 FLAGS = -Wall -Wextra -Werror
 
-SRC = Pony.cpp main.cpp
+SRC = main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
