@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 				std::cout << file_buf.str();
 			}
 			if(errno)
-				std::cerr << argv[0] << ": " << argv[i] << std::strerror(errno) << std::endl;
+				std::cerr << argv[0] << ": " << argv[i] << ' ' << std::strerror(errno) << std::endl;
 		}
 	}
 	return 0;

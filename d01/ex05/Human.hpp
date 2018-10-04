@@ -21,6 +21,7 @@ class Human
 public:
     const Brain br;
     std::string identify() const;
+    const Brain &getBrain(void) const;
 };
 
 #endif

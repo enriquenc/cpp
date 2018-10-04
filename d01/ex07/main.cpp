@@ -30,16 +30,13 @@ int main(int argc, char **argv) {
         to_change = argv[3];
 
         std::ifstream file(file_name.c_str());
-        if (!file)
-        {
-            std::cout << "Invalid file." << std::endl;
-            return 0;
-        }
         buffer << file.rdbuf();
+        if(errno)
+                std::cerr << argv[0] << ": " << file_name << ' ' << std::strerror(errno) << std::endl;
         str = buffer.str();
         while((start_pos = str.find(to_find, start_pos)) != std::string::npos) {
             str.replace(start_pos, to_find.length(), to_change);
-            start_pos += to_find.length();
+            start_pos += to_change.length();
         }
         file_name += ".replace";
         std::ofstream out(file_name.c_str());
