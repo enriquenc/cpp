@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/tmaslyan/cpp/d05/ex05/Bureaucrat.hpp
+iostream
+-
+stdexcept
+-
+Form.hpp
+/Users/tmaslyan/cpp/d05/ex05/Form.hpp
+
+/Users/tmaslyan/cpp/d05/ex05/CentralBureaucracy.cpp
+CentralBureaucracy.hpp
+/Users/tmaslyan/cpp/d05/ex05/CentralBureaucracy.hpp
+
+/Users/tmaslyan/cpp/d05/ex05/CentralBureaucracy.hpp
+Bureaucrat.hpp
+/Users/tmaslyan/cpp/d05/ex05/Bureaucrat.hpp
+OfficeBlock.hpp
+/Users/tmaslyan/cpp/d05/ex05/OfficeBlock.hpp
+
+/Users/tmaslyan/cpp/d05/ex05/Form.hpp
+iostream
+-
+string
+-
+Bureaucrat.hpp
+/Users/tmaslyan/cpp/d05/ex05/Bureaucrat.hpp
+
+/Users/tmaslyan/cpp/d05/ex05/Intern.hpp
+Form.hpp
+/Users/tmaslyan/cpp/d05/ex05/Form.hpp
+
+/Users/tmaslyan/cpp/d05/ex05/OfficeBlock.hpp
+Intern.hpp
+/Users/tmaslyan/cpp/d05/ex05/Intern.hpp
+Bureaucrat.hpp
+/Users/tmaslyan/cpp/d05/ex05/Bureaucrat.hpp
+

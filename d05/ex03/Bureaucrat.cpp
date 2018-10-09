@@ -11,8 +11,8 @@
 // ************************************************************************** //
 
 #include "Bureaucrat.hpp"
-//#include <string>
-// #include <stdexcept>
+#include <string>
+#include <stdexcept>
 
 Bureaucrat::Bureaucrat(void):   _name("NO_NAME"),
                                 _grade(150)
@@ -74,10 +74,23 @@ void Bureaucrat::signForm(Form &obj)
     try
     {
         obj.beSigned(_grade);
-        std::cout << _name << " signs " << obj.getName() << '.' << std::endl;
+        std::cout << _name << " signs " << obj.getName() << " with target" << obj.getTarget()  << '.' << std::endl;
     }
     catch (std::exception& e)
     {
-        std::cout << _name << " cannot sign " << obj.getName() << " because " << e.what() << std::endl;
+        std::cout << _name << " cannot sign " << obj.getName() << " with target" << obj.getTarget() << " because " << e.what() << std::endl;
+    }
+}
+
+void Bureaucrat::executeForm(Form const & form)
+{
+    try
+    {
+        form.execute(*this);
+        std::cout << _name << " executes " << form.getName() << " with target" << form.getTarget() << '.' << std::endl;
+    }
+    catch (std::exception& e)
+    {
+        std::cout << _name << " cannot execute " << form.getName() << " with target" << form.getTarget() << " because " << e.what() << std::endl;
     }
 }

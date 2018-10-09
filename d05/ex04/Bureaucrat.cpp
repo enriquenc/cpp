@@ -11,8 +11,8 @@
 // ************************************************************************** //
 
 #include "Bureaucrat.hpp"
-//#include <string>
-// #include <stdexcept>
+#include <string>
+#include <stdexcept>
 
 Bureaucrat::Bureaucrat(void):   _name("NO_NAME"),
                                 _grade(150)
@@ -49,7 +49,7 @@ std::string const &Bureaucrat::getName(void) const
 
 std::ostream &operator<<(std::ostream &o, Bureaucrat const & obj)
 {
-    o << obj.getName() << ", bureaucrat grade " << obj.getGrade() << ".";
+    o << ' ' << obj.getName() << ", bureaucrat grade " << obj.getGrade() << ".";
     return o;
 }
 
@@ -74,10 +74,29 @@ void Bureaucrat::signForm(Form &obj)
     try
     {
         obj.beSigned(_grade);
-        std::cout << _name << " signs " << obj.getName() << '.' << std::endl;
+        std::cout << "\033[0;34m" << _name << "(Grade " << _grade << ") signs " << obj.getName()
+        << "(s.grade " << obj.getSignGrade() << ", ex.grade " << obj.getExecuteGrade()
+        << " ) targeted on " << obj.getTarget() << " (" << (obj.getSigned() ? "Signed" : "Unsigned") << ")."  << "\033[0m" << std::endl;
     }
     catch (std::exception& e)
     {
-        std::cout << _name << " cannot sign " << obj.getName() << " because " << e.what() << std::endl;
+        std::cout << "\033[0;31m" << _name << "(Grade " << _grade << ") cannot sign " << obj.getName() << " targeted on "
+                  << obj.getTarget() << " (" << (obj.getSigned() ? "Signed" : "Unsigned") << ") because " << e.what() << "\033[0m" << std::endl;
+    }
+}
+
+void Bureaucrat::executeForm(Form const & form)
+{
+    try
+    {
+        form.execute(*this);
+        std::cout << "\033[0;35m" << _name << "(Grade " << _grade << ") signs " << " executes " << form.getName()
+                  << "(s.grade " << form.getSignGrade() << ", ex.grade " << form.getExecuteGrade()
+                  << " ) targeted on " << form.getTarget() << " (" << (form.getSigned() ? "Signed" : "Unsigned") << ")."  << "\033[0m" << std::endl;
+    }
+    catch (std::exception& e)
+    {
+        std::cout << "\033[0;31m" << _name << "(Grade " << _grade << ") cannot execute " << form.getName() << " targeted on "
+        << form.getTarget() << " (" << (form.getSigned() ? "Signed" : "Unsigned") << ") because " << e.what() << "\033[0m" << std::endl;
     }
 }
