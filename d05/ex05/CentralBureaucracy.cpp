@@ -6,7 +6,7 @@
 //   By: tmaslyan <tmaslyan@student.unit.ua>        +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2018/10/09 19:04:34 by tmaslyan          #+#    #+#             //
-//   Updated: 2018/10/09 19:04:35 by tmaslyan         ###   ########.fr       //
+//   Updated: 2018/10/10 23:03:25 by tmaslyan         ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -79,7 +79,7 @@ void CentralBureaucracy::doBureaucracy()
     std::string form_names[] = {"shrubbery creation", "robotomy request", "presidential pardon"};
     while(temp)
     {
-        _offices[rand()%_filled_offices].doBureaucracy(form_names[rand()%4], temp->_target);
+        _offices[rand()%_filled_offices].doBureaucracy(form_names[rand()%3], temp->_target);
         temp = temp->next;
         if (temp) {
             delete _targets;
