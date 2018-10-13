@@ -14,7 +14,6 @@
 #define SPAN_HPP
 
 #include <vector>
-#include 
 
 class Span
 {

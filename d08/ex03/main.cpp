@@ -15,62 +15,62 @@
 #include <fstream> 
 #include <vector> 
 
+#include "Symbol.h"
+#include "AsciiDown.h"
+#include "AsciiUp.h"
+#include "GetChar.h"
+#include "PutChar.h"
+#include "PointerToLeft.h"
+#include "PointerToRight.h"
+#include "Cycle.h"
 
 
-static char cpu[30000]; 
 
-int main(int argc, char **argv)  
+int main(int argc, char **argv)
 {
-
-    std::vector<char> acc;
+    if (argc == 1)
+    {
+        std::cout << "Usage: ./mindopen [file]" << std::endl;
+        return 0;
+    }
+    char *cpu = new char[30000];
+    std::vector<Symbol *> acc;
     char ch;
-    std::ifstream infile(argv[1]);
-    while(infile)
+    std::ifstream file;
+    file.open(argv[1]);
+    if (!file)
     {
-        infile.get(ch);
-        acc.push_back(ch);
+        std::cout << "Bad input file." << std::endl;
+        return 0;
     }
-    infile.close();
-    unsigned int j = 0;
-    int brc = 0;
-    for(int i = 0; i < acc.size(); ++i)
+    while(file.get(ch))
     {
-    
-        if(acc[i] == '>') j++;
-        if(acc[i] == '<') j--;
-        if(acc[i] == '+') cpu[j]++;
-        if(acc[i] == '-') cpu[j]--;
-        if(acc[i] == '.') std::cout << cpu[j];
-        if(acc[i] == ',') std::cin >> cpu[j];
-        if(acc[i] == '[')
+        switch (ch)
         {
-            if(!cpu[j])
-            {
-                ++brc;
-                while(brc)
-                {
-                    ++i;
-                    if (acc[i] == '[') ++brc;
-                    if (acc[i] == ']') --brc;
-                }
-            }
-            else continue;
-        }
-        else if(acc[i] == ']')
-        {
-            if(!cpu[j])
-                continue;
-            else
-            {
-                if(acc[i] == ']') brc++;
-                while(brc)
-                {
-                    --i;
-                    if(acc[i] == '[') brc--;
-                    if(acc[i] == ']') brc++;
-                }
-                --i;
-            }
+            case 'r':
+                acc.push_back(new PointerToRight());
+                break;
+            case 'l':
+                acc.push_back(new PointerToLeft());
+                break;
+            case 'u':
+                acc.push_back(new AsciiUp());
+                break;
+            case 'd':
+                acc.push_back(new AsciiDown());
+                break;
+            case '*':
+                acc.push_back(new PutChar());
+                break;
+            case '_':
+                acc.push_back(new GetChar());
+                break;
+            case '{':
+                acc.push_back(new Cycle());
+                acc.back()->push_back(file);
         }
     }
+    file.close();
+    for(int i = 0; i < static_cast<int>(acc.size()); i++)
+        acc[i]->action(&cpu);
 }

@@ -49,7 +49,7 @@ public:
         _list.pop_back();
     }
 
-    typedef typename std::list<T>::iteratoіr iterator;
+    typedef typename std::list<T>::iterator iterator;
 
     iterator begin(void)
     {

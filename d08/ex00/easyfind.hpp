@@ -17,12 +17,7 @@ template <typename T>
 
 typename T::iterator easyfind(T &cont, int to_find)
 {
-    typename T::iterator start;
-    for(start = cont.begin(); start != cont.end(); start++)
-        if (*start == to_find)
-            return start;
-    throw std::invalid_argument("argument not found.");
-    return start;
+    return std::find(cont.begin(),cont.end(), to_find);
 }
 
 #endif
